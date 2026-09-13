@@ -1,0 +1,482 @@
+{
+  "cells_total": 748,
+  "judged": 748,
+  "failed_or_missing": [],
+  "total_by_condition_model": {
+    "claude-arch|dsf": [
+      92.48,
+      15.66,
+      48
+    ],
+    "claude-plain|dsf": [
+      91.91,
+      14.34,
+      48
+    ],
+    "claude-plain|dsp": [
+      96.78,
+      3.87,
+      24
+    ],
+    "claude-plain|glm": [
+      89.59,
+      21.53,
+      16
+    ],
+    "codewhale-plain|default": [
+      86.25,
+      9.19,
+      2
+    ],
+    "dsh-plain|default": [
+      87.0,
+      15.56,
+      2
+    ],
+    "hermes-plain|default": [
+      91.88,
+      0.88,
+      2
+    ],
+    "kimi-plain|dsf": [
+      94.65,
+      9.13,
+      48
+    ],
+    "kimi-plain|glm": [
+      95.36,
+      5.06,
+      16
+    ],
+    "omp-plain|dsf": [
+      93.47,
+      14.47,
+      48
+    ],
+    "openclaw-plain|dsf": [
+      93.69,
+      9.34,
+      48
+    ],
+    "qwen-plain|dsf": [
+      91.27,
+      9.66,
+      48
+    ],
+    "raw-llm|dsf": [
+      77.03,
+      14.08,
+      48
+    ],
+    "raw-llm|dsp": [
+      83.85,
+      6.1,
+      24
+    ],
+    "raw-llm|glm": [
+      93.5,
+      6.48,
+      4
+    ],
+    "raw-llm|glm53": [
+      94.25,
+      4.87,
+      3
+    ],
+    "spine-arch|dsf": [
+      78.21,
+      26.29,
+      48
+    ],
+    "spine-arch|dsp": [
+      73.35,
+      24.21,
+      24
+    ],
+    "spine-arch|glm": [
+      98.67,
+      2.01,
+      16
+    ],
+    "spine-arch|glm53": [
+      100.0,
+      0.0,
+      1
+    ],
+    "spine-arch-think|dsf": [
+      94.27,
+      14.74,
+      48
+    ],
+    "spine-min|dsf": [
+      79.38,
+      22.07,
+      48
+    ],
+    "spine-min|glm": [
+      99.12,
+      2.05,
+      14
+    ],
+    "theseus-arch|dsf": [
+      67.28,
+      42.45,
+      48
+    ],
+    "theseus-arch|glm": [
+      72.38,
+      43.68,
+      12
+    ],
+    "theseus-plain|dsf": [
+      72.11,
+      39.63,
+      48
+    ],
+    "theseus-plain|glm": [
+      75.22,
+      42.69,
+      9
+    ],
+    "theseus-plain|glm53": [
+      32.67,
+      56.58,
+      3
+    ]
+  },
+  "total_by_task": {
+    "CAP-ARCH-001": [
+      72.54,
+      36.14,
+      40
+    ],
+    "CMP-ARCH-001": [
+      94.09,
+      19.85,
+      44
+    ],
+    "CRX-ARCH-001": [
+      87.91,
+      17.26,
+      45
+    ],
+    "CRX-CDC-001": [
+      91.73,
+      10.98,
+      31
+    ],
+    "CRX-DR-001": [
+      80.52,
+      29.97,
+      31
+    ],
+    "DR-ARCH-001": [
+      88.84,
+      19.48,
+      29
+    ],
+    "DTM-ARCH-001": [
+      89.81,
+      12.37,
+      27
+    ],
+    "DTM-RT-001": [
+      90.4,
+      14.8,
+      35
+    ],
+    "OCN-ARCH-001": [
+      80.33,
+      31.94,
+      27
+    ],
+    "OCN-HTAP-001": [
+      79.5,
+      33.73,
+      34
+    ],
+    "PGL-ARCH-001": [
+      85.47,
+      15.2,
+      30
+    ],
+    "PGL-ARCH-002": [
+      73.39,
+      33.81,
+      27
+    ],
+    "PGL-ARCH-003": [
+      66.96,
+      32.18,
+      27
+    ],
+    "PGL-MIG-001": [
+      88.7,
+      16.11,
+      27
+    ],
+    "PGL-OLAP-001": [
+      93.97,
+      7.4,
+      27
+    ],
+    "PGL-SEC-001": [
+      91.96,
+      15.21,
+      35
+    ],
+    "PVH-ARCH-001": [
+      86.28,
+      26.38,
+      35
+    ],
+    "RDS-ARCH-001": [
+      79.2,
+      31.52,
+      27
+    ],
+    "RDS-LOCK-001": [
+      90.84,
+      16.11,
+      27
+    ],
+    "SEC-ARCH-001": [
+      85.13,
+      25.13,
+      27
+    ],
+    "SGX-ARCH-001": [
+      85.35,
+      22.33,
+      27
+    ],
+    "SGX-INT-001": [
+      89.94,
+      18.26,
+      27
+    ],
+    "SYN-ACL-001": [
+      90.31,
+      16.39,
+      27
+    ],
+    "SYN-ARCH-001": [
+      92.25,
+      10.88,
+      35
+    ]
+  },
+  "by_condition": {
+    "claude-arch": {
+      "n": 48,
+      "completeness": 0.9792,
+      "hf_rate_judge": 0.0417,
+      "evidence_unverified": 0.7297,
+      "mean_secs": 458.6
+    },
+    "claude-plain": {
+      "n": 88,
+      "completeness": 0.9886,
+      "hf_rate_judge": 0.0455,
+      "evidence_unverified": 0.6572,
+      "mean_secs": 1191.8
+    },
+    "codewhale-plain": {
+      "n": 2,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0,
+      "evidence_unverified": 0.6833,
+      "mean_secs": 599.5
+    },
+    "dsh-plain": {
+      "n": 2,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0,
+      "evidence_unverified": 0.6,
+      "mean_secs": 980.2
+    },
+    "hermes-plain": {
+      "n": 2,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0,
+      "evidence_unverified": 0.7,
+      "mean_secs": 2827.2
+    },
+    "kimi-plain": {
+      "n": 64,
+      "completeness": 0.0359,
+      "hf_rate_judge": 0.0156,
+      "evidence_unverified": 0.6525,
+      "mean_secs": 1046.2
+    },
+    "omp-plain": {
+      "n": 48,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0625,
+      "evidence_unverified": 0.5597,
+      "mean_secs": 554.3
+    },
+    "openclaw-plain": {
+      "n": 48,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0208,
+      "evidence_unverified": 0.6068,
+      "mean_secs": 980.8
+    },
+    "qwen-plain": {
+      "n": 48,
+      "completeness": 0.9854,
+      "hf_rate_judge": 0.0208,
+      "evidence_unverified": 0.7241,
+      "mean_secs": 197.8
+    },
+    "raw-llm": {
+      "n": 79,
+      "completeness": 1.0,
+      "hf_rate_judge": 0.038,
+      "evidence_unverified": 0.643,
+      "mean_secs": 781.8
+    },
+    "spine-arch": {
+      "n": 89,
+      "completeness": 0.8629,
+      "hf_rate_judge": 0.191,
+      "evidence_unverified": 0.5828,
+      "mean_secs": 1578.1
+    },
+    "spine-arch-think": {
+      "n": 48,
+      "completeness": 0.9437,
+      "hf_rate_judge": 0.0625,
+      "evidence_unverified": 0.5124,
+      "mean_secs": 924.8
+    },
+    "spine-min": {
+      "n": 62,
+      "completeness": 0.9516,
+      "hf_rate_judge": 0.129,
+      "evidence_unverified": 0.6512,
+      "mean_secs": 1005.1
+    },
+    "theseus-arch": {
+      "n": 60,
+      "completeness": 0.8527,
+      "hf_rate_judge": 0.3333,
+      "evidence_unverified": 0.3737,
+      "mean_secs": 3945.4
+    },
+    "theseus-plain": {
+      "n": 60,
+      "completeness": 0.9733,
+      "hf_rate_judge": 0.3,
+      "evidence_unverified": 0.4316,
+      "mean_secs": 5717.8
+    }
+  },
+  "effects": {
+    "spine-arch - theseus-plain": {
+      "diff": 10.72,
+      "ci_lo": -0.92,
+      "ci_hi": 22.59,
+      "n_a": 64,
+      "n_b": 57
+    },
+    "spine-arch - claude-plain": {
+      "diff": -8.0,
+      "ci_lo": -15.18,
+      "ci_hi": -0.95,
+      "n_a": 64,
+      "n_b": 64
+    },
+    "spine-arch - spine-min": {
+      "diff": -0.51,
+      "ci_lo": -8.48,
+      "ci_hi": 7.45,
+      "n_a": 64,
+      "n_b": 62
+    },
+    "spine-arch - qwen-plain": {
+      "diff": -7.94,
+      "ci_lo": -14.52,
+      "ci_hi": -1.59,
+      "n_a": 64,
+      "n_b": 48
+    },
+    "spine-arch - openclaw-plain": {
+      "diff": -10.36,
+      "ci_lo": -17.06,
+      "ci_hi": -4.02,
+      "n_a": 64,
+      "n_b": 48
+    },
+    "spine-arch - kimi-plain": {
+      "diff": -11.5,
+      "ci_lo": -18.08,
+      "ci_hi": -5.32,
+      "n_a": 64,
+      "n_b": 64
+    },
+    "spine-arch - omp-plain": {
+      "diff": -10.15,
+      "ci_lo": -17.4,
+      "ci_hi": -2.97,
+      "n_a": 64,
+      "n_b": 48
+    },
+    "theseus-arch - theseus-plain": {
+      "diff": -4.31,
+      "ci_lo": -18.98,
+      "ci_hi": 10.29,
+      "n_a": 60,
+      "n_b": 57
+    },
+    "claude-arch - claude-plain": {
+      "diff": 1.15,
+      "ci_lo": -4.95,
+      "ci_hi": 6.93,
+      "n_a": 48,
+      "n_b": 64
+    },
+    "spine-arch-think - spine-arch": {
+      "diff": 10.94,
+      "ci_lo": 3.83,
+      "ci_hi": 18.18,
+      "n_a": 48,
+      "n_b": 64
+    },
+    "spine-arch-think - theseus-plain": {
+      "diff": 21.66,
+      "ci_lo": 10.71,
+      "ci_hi": 32.8,
+      "n_a": 48,
+      "n_b": 57
+    },
+    "spine-arch-think - openclaw-plain": {
+      "diff": 0.58,
+      "ci_lo": -4.57,
+      "ci_hi": 5.26,
+      "n_a": 48,
+      "n_b": 48
+    }
+  },
+  "effects_by_model": {
+    "spine-arch - theseus-plain | dsf": {
+      "diff": 6.1,
+      "ci_lo": -7.11,
+      "ci_hi": 19.54,
+      "n_a": 48,
+      "n_b": 48
+    },
+    "spine-arch - theseus-plain | glm": {
+      "diff": 23.45,
+      "ci_lo": 1.38,
+      "ci_hi": 55.2,
+      "n_a": 16,
+      "n_b": 9
+    }
+  },
+  "bootstrap": {
+    "n": 10000,
+    "seed": 42
+  }
+}
