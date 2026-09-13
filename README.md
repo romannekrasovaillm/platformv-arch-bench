@@ -1,16 +1,31 @@
 # Platform V Architecture Benchmark: Spine vs универсальные кодовые харнессы
 
+![Прогонов](https://img.shields.io/badge/прогонов-861-1f6feb)
+![Задачи](https://img.shields.io/badge/задачи-24-8250df)
+![Модели](https://img.shields.io/badge/модели-4-1a7f37)
+![Судья](https://img.shields.io/badge/LLM--судья-верификация_цитат-bf8700)
+![Гипотезы](https://img.shields.io/badge/гипотезы-пререгистрированы-cf222e)
+
 > Профессиональный бенчмарх архитектурных задач по документации **Platform V
 > (СберТех)**: измерение роли **харнесса и формата Spine** по сравнению с
 > универсальными кодовыми харнессами (Claude Code, Kimi Code, Theseus,
 > OpenClaw, Qwen Code, pi-coding-agent и др.).
+
+---
+
+> [!IMPORTANT]
+> ## 🎯 Ключевые выводы для архитекторов
 >
-> **831 прогон · 24 задачи · 19 условий · 4 модели · LLM-судья с
-> верификацией цитат · пререгистрация гипотез**
->
-> Статус: снапшот 13.09.2026 (19:43) — 861/973 ячеек завершено и
-> отсуждено; обрывы spine-ячеек исправлены (D18), arch-руки claude/kimi
-> и glm-расширение до 16 задач частичные (D17).
+> 1. **Специализированный харнесс архитектора работает.** Spine со спайн-пакетом значимо обходит Theseus (**+18.3 балла [+7.5; +29.0]**) и идёт **в паритете с лучшими универсалами**: Claude Code (−0.5 [−5.9; +5.0]) и Kimi Code (−4.1 [−8.4; −0.1]).
+> 2. **Но отрыва от универсалов нет.** Хороший универсальный харнесс + качественный `CONTEXT.md` закрывает те же задачи на 92–95 баллов без доменной специализации. Специализация поднимает Spine над самим собой, а не над рынком.
+> 3. **Доменный формат (architecture-spine + CONSTRAINTS.yaml) — слабый плюс, а не серебряная пуля:** +3–4 балла поверх голого харнесса. Без ризонинга модели формат не конвертируется в качество.
+> 4. **Кастомизация универсалов под архитекторов не окупается** (H2 ✗): arch-контексты у Theseus и Claude Code эффекта не дали, у Kimi Code — ухудшили результат (90.7 vs 94.7). Не тратьте время на «архитектурные» AGENTS.md для кодовых агентов.
+> 5. **Агентный контур важнее выбора харнесса:** голая модель (raw-llm) — 77 баллов против 90+ у любого харнесса. Разница между харнессами вторична.
+> 6. **Надёжность — главный риск агентных прогонов:** 30–33% ответов Theseus оборваны лимитом ходов; 18 «обрывов» Spine оказались дефектом извлечения, а не модели (D18); связка arch-be × glm-5.3-flash частично несовместима (D14). **Проверяйте пайплайн извлечения ответов прежде, чем судить модель.**
+> 7. **Всё модель-зависимо (H3 ✓):** эффект любого харнесса надо мерить на вашей целевой модели — выводы с DeepSeek V4.1 Flash на GLM-5.3 переносятся лишь частично.
+
+> [!TIP]
+> **EN — Key takeaways for architects:** (1) the specialized architect harness (Spine) beats Theseus by +18.3 [+7.5; +29.0] and is at parity with the best general-purpose harnesses (Claude Code, Kimi Code); (2) but there is no breakaway — good universals with a solid `CONTEXT.md` reach 92–95 without domain specialization; (3) the domain format (architecture-spine) is a small +3–4 on top of the harness, not a silver bullet; (4) architect customization of coding harnesses does not pay off (H2 rejected); (5) the agentic loop itself matters more than harness choice (raw model 77 vs 90+); (6) reliability is the main risk — turn-limit truncations and extraction defects, check your answer-extraction pipeline before judging a model; (7) everything is model-dependent — measure on your target model.
 
 ---
 
