@@ -8,8 +8,9 @@
 > **831 прогон · 24 задачи · 19 условий · 4 модели · LLM-судья с
 > верификацией цитат · пререгистрация гипотез**
 >
-> Статус: снапшот 13.09.2026 — 831/973 ячеек завершено и отсуждено
-> (arch-руки claude/kimi и glm-расширение до 16 задач частичные, D17).
+> Статус: снапшот 13.09.2026 (19:43) — 861/973 ячеек завершено и
+> отсуждено; обрывы spine-ячеек исправлены (D18), arch-руки claude/kimi
+> и glm-расширение до 16 задач частичные (D17).
 
 ---
 
@@ -58,8 +59,8 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 
 | Условие | DeepSeek V4.1 Flash | GLM-5.3 Flash | DeepSeek V4 Pro |
 |---|---|---|---|
-| **spine-arch** (Spine + формат) | 78.2 ± 26.3 | **98.7 ± 2.0** | 73.4 ± 24.2 |
-| **spine-min** (только харнесс) | 79.4 ± 22.1 | **99.1 ± 2.1** | — |
+| **spine-arch** (Spine + формат) | 89.6 ± 14.6 | 94.4 ± 17.7 | 82.2 ± 16.0 |
+| **spine-min** (только харнесс) | 84.4 ± 15.5 | **98.5 ± 3.3** | — |
 | **spine-arch-think** (Spine + ризонинг) | **94.3 ± 14.7** | — | — |
 | claude-plain (Claude Code) | 91.9 ± 14.3 | 89.6 ± 21.5 | 96.8 ± 3.9 |
 | kimi-plain (Kimi Code) | **94.7 ± 9.1** | 95.7 ± 5.1 | — |
@@ -75,30 +76,34 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 
 | Сравнение | Δ баллов | Что это значит |
 |---|---|---|
-| spine-arch − claude-plain | **−8.0 [−15.2; −0.9]** | Spine без ризонинга уступает Claude Code |
-| spine-arch − kimi-plain | **−11.5 [−18.1; −5.3]** | …и Kimi Code |
-| spine-arch − spine-min | −0.5 [−8.5; +7.5] | вклад формата отдельно от харнесса ≈ 0 |
-| **spine-arch-think − spine-arch** | **+10.9 [+3.8; +18.2]** | ризонинг даёт Spine +11 баллов |
-| **spine-arch-think − theseus-plain** | **+21.7 [+10.7; +32.8]** | Spine + ризонинг значимо сильнее Theseus |
-| spine-arch − theseus-plain \| **glm** | **+23.5 [+1.4; +55.2]** | на GLM Spine — топовый харнесс |
+| spine-arch − claude-plain | **−0.5 [−5.9; +5.0]** | **паритет** с Claude Code (после фикса D18) |
+| spine-arch − kimi-plain | **−4.1 [−8.4; −0.1]** | минимальное отставание от Kimi Code |
+| spine-arch − theseus-plain | **+18.3 [+7.5; +29.0]** | **Spine значимо сильнее Theseus (H1 ✓)** |
+| spine-arch − spine-min | +3.0 [−2.1; +8.0] | вклад формата — слабый плюс поверх харнесса |
+| spine-arch-think − theseus-plain | **+21.7 [+11.0; +32.9]** | Spine + ризонинг значимо сильнее Theseus |
+| spine-arch-think − spine-arch | +3.4 [−2.3; +8.8] | премия ризонинга после фикса обрывов |
 
 ![Средний балл по условиям](report/01_total_by_condition.png)
 ![Эффекты с доверительными интервалами](report/02_effects_forest.png)
 
 ### Честная интерпретация
 
-1. **Роль Spine — модель-зависима (H3 подтверждена).** На GLM-5.3-Flash
-   Spine — **на уровне лучших универсалов**: на первых 8 задачах лидировал
-   (98.7/99.1), но при расширении до 10 задач преимущество над Claude Code
-   (+4.8 [−7.8; +19.0]) и Kimi Code (−1.3 [−10.8; +4.7]) перестало быть
-   статистически значимым; spine-min сохраняет небольшое значимое
-   преимущество (+8.9 [+1.7; +20.6] и +2.9 [+0.3; +5.4]).
-   На DeepSeek V4.1-Flash без ризонинга Spine уступает обоим универсалам.
-2. **Формат спайна отдельно от харнесса не конвертируется в баллы**
-   (spine-arch ≈ spine-min): одного документального контекста недостаточно —
-   нужна связка «формат + ризонинг».
-3. **Ризонинг — главный усилитель Spine на DeepSeek** (+10.9), снимающий
-   отставание от универсалов.
+0. **Важно: исправление D18 (обрывы).** Первая редакция результатов
+   занижала Spine: 18 ячеек получили hard-fail из-за дефекта извлечения
+   (arch-be писал полный документ в `work/answer.md`, а на stdout отдавал
+   краткое подтверждение). После восстановления документов средний балл
+   spine-arch на dsf вырос с 78.2 до 89.6, а выводы изменились:
+1. **H1 подтверждена против Theseus и в паритете против лучших
+   универсалов:** spine-arch − theseus-plain = **+18.3 [+7.5; +29.0]**;
+   против Claude Code — **паритет** (−0.5 [−5.9; +5.0]); против Kimi Code —
+   минимальное отставание (−4.1 [−8.4; −0.1]). На GLM-5.3-Flash Spine —
+   на уровне лучших универсалов (spine-min 98.5).
+2. **Формат спайна — слабый плюс поверх харнесса** (+3.0 [−2.1; +8.0];
+   в парном по задачам анализе — около +4), а не ноль, как в первой
+   редакции (там вклад формата тонул в обрывах).
+3. **Специализация даёт прирост относительно самого Spine, но не отрыв
+   от хороших универсалов** — Kimi/Claude Code закрывают те же задачи
+   на 92–95 баллов без доменного формата.
 4. **Кастомизация универсалов под архитекторов (H2) эффекта не дала**:
    Theseus −4.3 [−19.0; +10.3], Claude Code +1.1 [−5.0; +6.9].
 5. Побочные находки: hard-fail rate у Theseus 30–33% (обрезка на лимите
@@ -167,8 +172,9 @@ pi-coding-agent), on 24 architecture tasks built from the official
 
 **831 runs · 24 tasks · 19 conditions · 4 models · evidence-verified LLM judge · preregistered hypotheses**
 >
-> Status: 2026-09-13 snapshot — 831/973 cells completed and judged
-> (claude/kimi arch arms and the 16-task GLM extension are partial, D17).
+> Status: 2026-09-13 19:43 snapshot — 861/973 cells completed and
+> judged; spine truncation defect fixed (D18); claude/kimi arch arms and
+> the 16-task GLM extension are partial (D17).
 
 ### Headline results
 
@@ -181,19 +187,23 @@ pi-coding-agent), on 24 architecture tasks built from the official
 > architect customization; `<harness>-arch` — same harness with architect
 > customization; `raw-llm` — bare model (single API call).
 >
-- **Spine's role is model-dependent (H3 confirmed).** On GLM-5.3-Flash,
-  Spine is **on par with the best general-purpose harnesses**: it led on
-  the first 8 tasks (98.7/99.1), but after extending to 10 tasks the edge
-  over Claude Code (+4.8 [−7.8; +19.0]) and Kimi Code (−1.3 [−10.8; +4.7])
-  is no longer statistically significant; spine-min keeps a small
-  significant lead (+8.9 [+1.7; +20.6], +2.9 [+0.3; +5.4]). On DeepSeek
-  V4.1-Flash without reasoning it trails both (−8.0 [−15.2; −0.9] vs
-  Claude Code, −11.5 [−18.1; −5.3] vs Kimi Code).
-- **The spine format alone adds ~0** over the bare harness
-  (−0.5 [−8.5; +7.5]); the working combination is "format + reasoning".
-- **Reasoning is Spine's main amplifier on DeepSeek** (+10.9
-  [+3.8; +18.2]); Spine with reasoning beats Theseus by +21.7
-  [+10.7; +32.8].
+- **Important: D18 truncation fix.** The first data edition understated
+  Spine: 18 cells hard-failed due to an extraction defect (arch-be wrote
+  the full document to `work/answer.md` but printed only a short
+  confirmation to stdout). After restoring the documents, spine-arch on
+  dsf rose from 78.2 to 89.6 and the conclusions changed:
+- **H1 confirmed vs Theseus, parity vs the best universal harnesses:**
+  spine-arch − theseus-plain = **+18.3 [+7.5; +29.0]**; vs Claude Code —
+  **parity** (−0.5 [−5.9; +5.0]); vs Kimi Code — a minimal gap
+  (−4.1 [−8.4; −0.1]). On GLM-5.3-Flash Spine is on par with the best
+  (spine-min 98.5).
+- **The spine format is a small plus on top of the harness**
+  (+3.0 [−2.1; +8.0], ~+4 in the task-paired view), not zero as in the
+  first edition.
+- **Specialization lifts Spine over itself but does not break away from
+  good universal harnesses** — Kimi/Claude Code score 92–95 without the
+  domain format.
+- Spine with reasoning beats Theseus by +21.7 [+11.0; +32.9].
 - **Customization of coding harnesses for architects (H2) showed no
   effect** (Theseus −4.3, Claude Code +1.1, CI spans zero).
 - Side findings: Theseus hard-fail rate 30–33% (turn-limit truncation);

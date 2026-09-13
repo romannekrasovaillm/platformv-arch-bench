@@ -1,45 +1,26 @@
 {
-  "cells_total": 973,
-  "judged": 831,
+  "cells_total": 972,
+  "judged": 861,
   "failed_or_missing": [
     "CAP-ARCH-001__claude-arch__glm__r1",
-    "CAP-ARCH-001__kimi-arch__dsf__r1",
-    "CAP-ARCH-001__kimi-arch__dsf__r2",
-    "CMP-ARCH-001__kimi-arch__dsf__r1",
-    "CMP-ARCH-001__kimi-arch__dsf__r2",
-    "CRX-ARCH-001__kimi-arch__dsf__r1",
-    "CRX-ARCH-001__kimi-arch__dsf__r2",
     "CRX-CDC-001__claude-arch__glm__r2",
     "CRX-CDC-001__claude-plain__glm__r1",
     "CRX-CDC-001__claude-plain__glm__r2",
-    "CRX-CDC-001__kimi-arch__dsf__r1",
-    "CRX-CDC-001__kimi-arch__dsf__r2",
     "CRX-CDC-001__spine-arch__glm__r1",
-    "CRX-DR-001__kimi-arch__dsf__r1",
-    "CRX-DR-001__kimi-arch__dsf__r2",
     "DR-ARCH-001__claude-arch__glm__r1",
     "DR-ARCH-001__claude-arch__glm__r2",
     "DR-ARCH-001__claude-plain__glm__r1",
     "DR-ARCH-001__claude-plain__glm__r2",
-    "DR-ARCH-001__kimi-arch__dsf__r1",
-    "DR-ARCH-001__kimi-arch__dsf__r2",
-    "DR-ARCH-001__spine-arch__dsf__r3",
     "DR-ARCH-001__spine-arch__glm__r2",
     "DR-ARCH-001__spine-min__glm__r1",
     "DR-ARCH-001__spine-min__glm__r2",
-    "DTM-ARCH-001__kimi-arch__dsf__r1",
-    "DTM-ARCH-001__kimi-arch__dsf__r2",
     "DTM-RT-001__claude-arch__glm__r1",
     "DTM-RT-001__claude-arch__glm__r2",
-    "DTM-RT-001__kimi-arch__dsf__r1",
-    "DTM-RT-001__kimi-arch__dsf__r2",
     "DTM-RT-001__kimi-arch__glm__r2",
     "OCN-ARCH-001__claude-arch__glm__r1",
     "OCN-ARCH-001__claude-arch__glm__r2",
     "OCN-ARCH-001__claude-plain__glm__r1",
     "OCN-ARCH-001__claude-plain__glm__r2",
-    "OCN-ARCH-001__kimi-arch__dsf__r1",
-    "OCN-ARCH-001__kimi-arch__dsf__r2",
     "OCN-ARCH-001__kimi-arch__glm__r1",
     "OCN-ARCH-001__kimi-arch__glm__r2",
     "OCN-ARCH-001__kimi-plain__glm__r1",
@@ -50,16 +31,12 @@
     "OCN-ARCH-001__spine-min__glm__r2",
     "OCN-HTAP-001__claude-arch__glm__r1",
     "OCN-HTAP-001__claude-arch__glm__r2",
-    "OCN-HTAP-001__kimi-arch__dsf__r1",
-    "OCN-HTAP-001__kimi-arch__dsf__r2",
     "OCN-HTAP-001__kimi-arch__glm__r1",
     "OCN-HTAP-001__kimi-arch__glm__r2",
     "PGL-ARCH-001__claude-arch__glm__r1",
     "PGL-ARCH-001__claude-arch__glm__r2",
     "PGL-ARCH-001__claude-plain__glm__r1",
     "PGL-ARCH-001__claude-plain__glm__r2",
-    "PGL-ARCH-001__kimi-arch__dsf__r1",
-    "PGL-ARCH-001__kimi-arch__dsf__r2",
     "PGL-ARCH-001__kimi-arch__glm__r1",
     "PGL-ARCH-001__kimi-arch__glm__r2",
     "PGL-ARCH-001__kimi-plain__glm__r1",
@@ -68,8 +45,6 @@
     "PGL-ARCH-001__spine-arch__glm__r2",
     "PGL-ARCH-001__spine-min__glm__r1",
     "PGL-ARCH-001__spine-min__glm__r2",
-    "PGL-ARCH-002__kimi-arch__dsf__r1",
-    "PGL-ARCH-002__kimi-arch__dsf__r2",
     "PGL-OLAP-001__claude-arch__glm__r1",
     "PGL-OLAP-001__claude-arch__glm__r2",
     "PGL-OLAP-001__claude-plain__glm__r1",
@@ -129,18 +104,12 @@
     "SGX-ARCH-001__spine-min__glm__r1",
     "SGX-ARCH-001__spine-min__glm__r2",
     "SGX-INT-001__claude-arch__dsp__r1",
-    "SGX-INT-001__kimi-arch__dsf__r1",
-    "SGX-INT-001__kimi-arch__dsf__r2",
     "SGX-INT-001__kimi-arch__dsp__r1",
     "SYN-ACL-001__claude-arch__dsp__r1",
-    "SYN-ACL-001__kimi-arch__dsf__r1",
-    "SYN-ACL-001__kimi-arch__dsf__r2",
     "SYN-ACL-001__kimi-arch__dsp__r1",
     "SYN-ARCH-001__claude-arch__dsp__r1",
     "SYN-ARCH-001__claude-arch__glm__r1",
     "SYN-ARCH-001__claude-arch__glm__r2",
-    "SYN-ARCH-001__kimi-arch__dsf__r1",
-    "SYN-ARCH-001__kimi-arch__dsf__r2",
     "SYN-ARCH-001__kimi-arch__dsp__r1",
     "SYN-ARCH-001__kimi-arch__glm__r1",
     "SYN-ARCH-001__kimi-arch__glm__r2"
@@ -192,9 +161,9 @@
       2
     ],
     "kimi-arch|dsf": [
-      90.69,
-      19.15,
-      18
+      93.98,
+      12.27,
+      48
     ],
     "kimi-arch|dsp": [
       92.76,
@@ -252,13 +221,13 @@
       3
     ],
     "spine-arch|dsf": [
-      78.21,
-      26.29,
+      89.55,
+      14.56,
       48
     ],
     "spine-arch|dsp": [
-      73.35,
-      24.21,
+      82.19,
+      16.02,
       24
     ],
     "spine-arch|glm": [
@@ -277,8 +246,8 @@
       48
     ],
     "spine-min|dsf": [
-      79.38,
-      22.07,
+      84.36,
+      15.48,
       48
     ],
     "spine-min|glm": [
@@ -314,64 +283,64 @@
   },
   "total_by_task": {
     "CAP-ARCH-001": [
-      74.41,
-      34.46,
-      45
+      75.38,
+      33.34,
+      47
     ],
     "CMP-ARCH-001": [
-      94.56,
-      18.65,
-      50
+      94.55,
+      18.29,
+      52
     ],
     "CRX-ARCH-001": [
-      89.24,
-      16.6,
-      51
+      90.21,
+      14.73,
+      53
     ],
     "CRX-CDC-001": [
-      92.49,
-      9.77,
-      41
+      92.74,
+      9.61,
+      43
     ],
     "CRX-DR-001": [
-      81.13,
-      29.13,
-      33
+      84.8,
+      25.61,
+      35
     ],
     "DR-ARCH-001": [
-      88.24,
-      20.87,
-      36
-    ],
-    "DTM-ARCH-001": [
-      90.25,
-      12.08,
-      29
-    ],
-    "DTM-RT-001": [
-      90.66,
-      14.28,
+      90.91,
+      15.64,
       38
     ],
+    "DTM-ARCH-001": [
+      92.33,
+      6.92,
+      31
+    ],
+    "DTM-RT-001": [
+      92.12,
+      11.32,
+      40
+    ],
     "OCN-ARCH-001": [
-      81.41,
-      31.05,
-      29
+      82.55,
+      30.32,
+      31
     ],
     "OCN-HTAP-001": [
-      80.62,
-      33.08,
-      36
+      83.25,
+      31.13,
+      38
     ],
     "PGL-ARCH-001": [
-      85.11,
-      14.77,
-      32
+      85.56,
+      14.54,
+      34
     ],
     "PGL-ARCH-002": [
-      74.56,
-      32.93,
-      29
+      77.69,
+      31.67,
+      31
     ],
     "PGL-ARCH-003": [
       66.94,
@@ -389,13 +358,13 @@
       31
     ],
     "PGL-SEC-001": [
-      92.71,
-      14.57,
+      94.36,
+      10.46,
       39
     ],
     "PVH-ARCH-001": [
-      87.69,
-      25.3,
+      89.67,
+      23.01,
       39
     ],
     "RDS-ARCH-001": [
@@ -404,8 +373,8 @@
       31
     ],
     "RDS-LOCK-001": [
-      91.62,
-      15.17,
+      93.48,
+      11.62,
       31
     ],
     "SEC-ARCH-001": [
@@ -414,24 +383,24 @@
       31
     ],
     "SGX-ARCH-001": [
-      86.16,
-      21.74,
+      90.66,
+      15.31,
       29
     ],
     "SGX-INT-001": [
-      89.94,
-      18.26,
-      27
+      94.94,
+      4.46,
+      29
     ],
     "SYN-ACL-001": [
-      90.31,
-      16.39,
-      27
+      93.22,
+      11.4,
+      29
     ],
     "SYN-ARCH-001": [
-      92.25,
-      10.88,
-      35
+      92.67,
+      10.72,
+      37
     ]
   },
   "by_condition": {
@@ -471,11 +440,11 @@
       "mean_secs": 2827.2
     },
     "kimi-arch": {
-      "n": 49,
-      "completeness": 0.0061,
-      "hf_rate_judge": 0.0612,
-      "evidence_unverified": 0.5901,
-      "mean_secs": 870.5
+      "n": 79,
+      "completeness": 0.0038,
+      "hf_rate_judge": 0.038,
+      "evidence_unverified": 0.5801,
+      "mean_secs": 801.6
     },
     "kimi-plain": {
       "n": 68,
@@ -514,9 +483,9 @@
     },
     "spine-arch": {
       "n": 91,
-      "completeness": 0.8549,
-      "hf_rate_judge": 0.1978,
-      "evidence_unverified": 0.5856,
+      "completeness": 0.989,
+      "hf_rate_judge": 0.0659,
+      "evidence_unverified": 0.6137,
       "mean_secs": 1573.1
     },
     "spine-arch-think": {
@@ -528,10 +497,10 @@
     },
     "spine-min": {
       "n": 64,
-      "completeness": 0.9531,
-      "hf_rate_judge": 0.125,
-      "evidence_unverified": 0.6496,
-      "mean_secs": 1004.7
+      "completeness": 1.0,
+      "hf_rate_judge": 0.0625,
+      "evidence_unverified": 0.6448,
+      "mean_secs": 1007.8
     },
     "theseus-arch": {
       "n": 60,
@@ -550,51 +519,51 @@
   },
   "effects": {
     "spine-arch - theseus-plain": {
-      "diff": 10.01,
-      "ci_lo": -1.8,
-      "ci_hi": 21.61,
+      "diff": 18.26,
+      "ci_lo": 7.53,
+      "ci_hi": 29.03,
       "n_a": 66,
       "n_b": 57
     },
     "spine-arch - claude-plain": {
-      "diff": -8.71,
-      "ci_lo": -16.12,
-      "ci_hi": -1.69,
+      "diff": -0.47,
+      "ci_lo": -5.9,
+      "ci_hi": 5.03,
       "n_a": 66,
       "n_b": 64
     },
     "spine-arch - spine-min": {
-      "diff": -1.55,
-      "ci_lo": -9.44,
-      "ci_hi": 6.52,
+      "diff": 2.97,
+      "ci_lo": -2.1,
+      "ci_hi": 7.99,
       "n_a": 66,
       "n_b": 64
     },
     "spine-arch - qwen-plain": {
-      "diff": -8.65,
-      "ci_lo": -15.36,
-      "ci_hi": -2.28,
+      "diff": -0.41,
+      "ci_lo": -5.11,
+      "ci_hi": 4.04,
       "n_a": 66,
       "n_b": 48
     },
     "spine-arch - openclaw-plain": {
-      "diff": -11.07,
-      "ci_lo": -17.7,
-      "ci_hi": -4.65,
+      "diff": -2.82,
+      "ci_lo": -7.38,
+      "ci_hi": 1.63,
       "n_a": 66,
       "n_b": 48
     },
     "spine-arch - kimi-plain": {
-      "diff": -12.33,
-      "ci_lo": -18.65,
-      "ci_hi": -6.3,
+      "diff": -4.08,
+      "ci_lo": -8.36,
+      "ci_hi": -0.14,
       "n_a": 66,
       "n_b": 68
     },
     "spine-arch - omp-plain": {
-      "diff": -10.86,
-      "ci_lo": -18.28,
-      "ci_hi": -3.81,
+      "diff": -2.61,
+      "ci_lo": -7.89,
+      "ci_hi": 3.07,
       "n_a": 66,
       "n_b": 48
     },
@@ -613,9 +582,9 @@
       "n_b": 64
     },
     "spine-arch-think - spine-arch": {
-      "diff": 11.65,
-      "ci_lo": 4.35,
-      "ci_hi": 18.84,
+      "diff": 3.4,
+      "ci_lo": -2.31,
+      "ci_hi": 8.81,
       "n_a": 48,
       "n_b": 66
     },
@@ -636,9 +605,9 @@
   },
   "effects_by_model": {
     "spine-arch - theseus-plain | dsf": {
-      "diff": 6.1,
-      "ci_lo": -6.62,
-      "ci_hi": 19.46,
+      "diff": 17.44,
+      "ci_lo": 5.89,
+      "ci_hi": 29.46,
       "n_a": 48,
       "n_b": 48
     },
