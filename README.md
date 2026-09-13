@@ -5,8 +5,11 @@
 > универсальными кодовыми харнессами (Claude Code, Kimi Code, Theseus,
 > OpenClaw, Qwen Code, pi-coding-agent и др.).
 >
-> **748 прогонов · 24 задачи · 15 условий · 4 модели · LLM-судья с
+> **831 прогон · 24 задачи · 19 условий · 4 модели · LLM-судья с
 > верификацией цитат · пререгистрация гипотез**
+>
+> Статус: снапшот 13.09.2026 — 831/973 ячеек завершено и отсуждено
+> (arch-руки claude/kimi и glm-расширение до 16 задач частичные, D17).
 
 ---
 
@@ -59,7 +62,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 | **spine-min** (только харнесс) | 79.4 ± 22.1 | **99.1 ± 2.1** | — |
 | **spine-arch-think** (Spine + ризонинг) | **94.3 ± 14.7** | — | — |
 | claude-plain (Claude Code) | 91.9 ± 14.3 | 89.6 ± 21.5 | 96.8 ± 3.9 |
-| kimi-plain (Kimi Code) | **94.7 ± 9.1** | 95.4 ± 5.1 | — |
+| kimi-plain (Kimi Code) | **94.7 ± 9.1** | 95.7 ± 5.1 | — |
+| claude-arch (Claude Code + кастом.) | 92.5 ± 15.7 | 95.3 (n=6) | 92.1 (n=20) |
+| kimi-arch (Kimi Code + кастом.) | 90.7 (n=18) | 96.4 (n=11) | 92.8 (n=20) |
 | openclaw-plain | 93.7 ± 9.3 | — | — |
 | omp-plain | 93.5 ± 14.5 | — | — |
 | qwen-plain | 91.3 ± 9.7 | — | — |
@@ -83,8 +88,12 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 ### Честная интерпретация
 
 1. **Роль Spine — модель-зависима (H3 подтверждена).** На GLM-5.3-Flash
-   Spine — лучший харнесс бенчмарка (98.7/99.1, обогнав Claude Code и
-   Kimi Code); на DeepSeek V4.1-Flash без ризонинга — уступает обоим.
+   Spine — **на уровне лучших универсалов**: на первых 8 задачах лидировал
+   (98.7/99.1), но при расширении до 10 задач преимущество над Claude Code
+   (+4.8 [−7.8; +19.0]) и Kimi Code (−1.3 [−10.8; +4.7]) перестало быть
+   статистически значимым; spine-min сохраняет небольшое значимое
+   преимущество (+8.9 [+1.7; +20.6] и +2.9 [+0.3; +5.4]).
+   На DeepSeek V4.1-Flash без ризонинга Spine уступает обоим универсалам.
 2. **Формат спайна отдельно от харнесса не конвертируется в баллы**
    (spine-arch ≈ spine-min): одного документального контекста недостаточно —
    нужна связка «формат + ризонинг».
@@ -102,8 +111,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 
 ### Методология
 
-- **Матрица**: 748 ячеек = 24 задачи × 15 условий × до 2 повторов ×
-  4 модели (DeepSeek V4.1 Flash / V4 Pro, GLM-5.3 Flash / 5.3).
+- **Матрица**: 973 ячейки (завершено 831) = 24 задачи × 19 условий ×
+  до 2 повторов × 4 модели (DeepSeek V4.1 Flash / V4 Pro, GLM-5.3 Flash /
+  5.3). kimi×glm прогонялся через OpenRouter (та же модель, D17).
 - **Условия**: spine-arch, spine-min, spine-arch-think, theseus-plain/arch,
   claude-plain/arch, kimi-plain, openclaw-plain, qwen-plain, omp-plain,
   raw-llm + свип dsh/codewhale/hermes (по 2 задачи).
@@ -155,7 +165,10 @@ harnesses** (Claude Code, Kimi Code, Theseus, OpenClaw, Qwen Code,
 pi-coding-agent), on 24 architecture tasks built from the official
 **Platform V (SberTech)** documentation.
 
-**748 runs · 24 tasks · 15 conditions · 4 models · evidence-verified LLM judge · preregistered hypotheses**
+**831 runs · 24 tasks · 19 conditions · 4 models · evidence-verified LLM judge · preregistered hypotheses**
+>
+> Status: 2026-09-13 snapshot — 831/973 cells completed and judged
+> (claude/kimi arch arms and the 16-task GLM extension are partial, D17).
 
 ### Headline results
 
@@ -169,9 +182,13 @@ pi-coding-agent), on 24 architecture tasks built from the official
 > customization; `raw-llm` — bare model (single API call).
 >
 - **Spine's role is model-dependent (H3 confirmed).** On GLM-5.3-Flash,
-  Spine is the top harness of the benchmark (98.7/99.1, ahead of Claude
-  Code and Kimi Code); on DeepSeek V4.1-Flash without reasoning it trails
-  both (−8.0 [−15.2; −0.9] vs Claude Code, −11.5 [−18.1; −5.3] vs Kimi Code).
+  Spine is **on par with the best general-purpose harnesses**: it led on
+  the first 8 tasks (98.7/99.1), but after extending to 10 tasks the edge
+  over Claude Code (+4.8 [−7.8; +19.0]) and Kimi Code (−1.3 [−10.8; +4.7])
+  is no longer statistically significant; spine-min keeps a small
+  significant lead (+8.9 [+1.7; +20.6], +2.9 [+0.3; +5.4]). On DeepSeek
+  V4.1-Flash without reasoning it trails both (−8.0 [−15.2; −0.9] vs
+  Claude Code, −11.5 [−18.1; −5.3] vs Kimi Code).
 - **The spine format alone adds ~0** over the bare harness
   (−0.5 [−8.5; +7.5]); the working combination is "format + reasoning".
 - **Reasoning is Spine's main amplifier on DeepSeek** (+10.9
@@ -184,7 +201,8 @@ pi-coding-agent), on 24 architecture tasks built from the official
 
 ### Methodology
 
-748 cells = 24 tasks × 15 conditions × up to 2 repetitions × 4 models.
+973 cells (831 completed) = 24 tasks × 19 conditions × up to 2
+repetitions × 4 models; kimi×glm ran via OpenRouter (same model, D17).
 Each task ships `TASK.md` (role, D1–D10 deliverables), `CONTEXT.md`
 (doc-labeled product facts, INF/NFR/SEC requirements) and `RUBRICS.md`
 (weighted 0–4 criteria, hard-fail rules). Judge: deepseek-v4-pro over
