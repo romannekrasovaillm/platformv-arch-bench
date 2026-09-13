@@ -96,6 +96,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 | spine-arch − theseus-plain | **+18.3 [+7.5; +29.0]** | **Spine значимо сильнее Theseus (H1 ✓)** |
 | spine-arch − spine-min | +3.0 [−2.1; +8.0] | вклад формата — слабый плюс поверх харнесса |
 | spine-arch-think − theseus-plain | **+21.7 [+11.0; +32.9]** | Spine + ризонинг значимо сильнее Theseus |
+| spine-arch-think − claude-plain (фабричный) | +2.9 [−3.0; +8.7] | премия над фабричным Claude Code (паритет) |
+| spine-arch-think − claude-arch (arch-контекст) | +1.5 [−4.3; +7.2] | премия над Claude Code с кастомизацией (паритет) |
+| spine-arch-think − kimi-plain | −0.7 [−5.6; +3.5] | паритет с Kimi Code |
 | spine-arch-think − spine-arch | +3.4 [−2.3; +8.8] | премия ризонинга после фикса обрывов |
 
 ![Средний балл по условиям](report/01_total_by_condition.png)
