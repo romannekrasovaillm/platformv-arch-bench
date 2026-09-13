@@ -76,7 +76,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 |---|---|---|---|
 | **spine-arch** (Spine + формат) | 89.6 ± 14.6 | 94.4 ± 17.7 | 82.2 ± 16.0 |
 | **spine-min** (только харнесс) | 84.4 ± 15.5 | **98.5 ± 3.3** | — |
-| **spine-arch-think** (Spine + ризонинг) | **94.3 ± 14.7** | — | — |
+| **spine-arch-think** (Spine + ризонинг) | **94.3 ± 14.7** | **97.2 ± 3.7** | **94.5 ± 12.3** |
 | claude-plain (Claude Code) | 91.9 ± 14.3 | 89.6 ± 21.5 | 96.8 ± 3.9 |
 | kimi-plain (Kimi Code) | **94.7 ± 9.1** | 95.7 ± 5.1 | — |
 | claude-arch (Claude Code + кастом.) | 92.5 ± 15.7 | 95.3 (n=6) | 92.1 (n=20) |
@@ -99,6 +99,10 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 | spine-arch-think − claude-plain (фабричный) | +2.9 [−3.0; +8.7] | премия над фабричным Claude Code (паритет) |
 | spine-arch-think − claude-arch (arch-контекст) | +1.5 [−4.3; +7.2] | премия над Claude Code с кастомизацией (паритет) |
 | spine-arch-think − kimi-plain | −0.7 [−5.6; +3.5] | паритет с Kimi Code |
+| think − claude-plain \| **glm** | **+7.6 [+0.6; +19.4]** | на GLM think значимо выше Claude Code |
+| think − kimi-plain \| **glm** | +1.5 [−0.9; +4.0] | на GLM паритет с Kimi Code |
+| think − spine-arch \| **dsp** | **+12.3 [+4.4; +20.2]** | ризонинг на V4 Pro: +12 к себе |
+| think − claude-plain \| **dsp** | −2.3 [−8.0; +1.6] | на V4 Pro паритет-минус с Claude Code |
 | spine-arch-think − spine-arch | +3.4 [−2.3; +8.8] | премия ризонинга после фикса обрывов |
 
 ![Средний балл по условиям](report/01_total_by_condition.png)
