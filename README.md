@@ -41,6 +41,18 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 
 **Сводка по условию × модели** (балл LLM-судьи 0–100, выше = лучше):
 
+> **Обозначения условий:** `spine-arch` — харнесс Spine + спайн-пакет
+> (architecture-spine + CONSTRAINTS.yaml, fitness-гейт) — «харнесс и
+> формат»; `spine-min` — тот же харнесс Spine **без** спайн-пакета,
+> минимальный системный промпт — изолирует вклад харнесса;
+> `spine-arch-think` — `spine-arch` с включённым ризонингом модели
+> (бюджет 64K); `<харнесс>-plain` — универсальный кодовый харнесс
+> (Claude Code, Kimi Code, Theseus, OpenClaw, Qwen Code, omp)
+> **в заводской конфигурации**, без архитектурной кастомизации;
+> `<харнесс>-arch` — тот же харнесс с arch-кастомизацией
+> (AGENTS.md/CLAUDE.md для архитекторов); `raw-llm` — голая модель
+> (одиночный API-вызов, без агентного контура).
+
 | Условие | DeepSeek V4.1 Flash | GLM-5.3 Flash | DeepSeek V4 Pro |
 |---|---|---|---|
 | **spine-arch** (Spine + формат) | 78.2 ± 26.3 | **98.7 ± 2.0** | 73.4 ± 24.2 |
@@ -147,6 +159,15 @@ pi-coding-agent), on 24 architecture tasks built from the official
 
 ### Headline results
 
+> **Condition glossary:** `spine-arch` — Spine harness + spine pack
+> (architecture-spine + CONSTRAINTS.yaml, fitness gate), i.e. "harness and
+> format"; `spine-min` — same Spine harness **without** the spine pack
+> (isolates the harness contribution); `spine-arch-think` — `spine-arch`
+> with model reasoning enabled (64K budget); `<harness>-plain` — a
+> general-purpose coding harness in its **stock configuration**, no
+> architect customization; `<harness>-arch` — same harness with architect
+> customization; `raw-llm` — bare model (single API call).
+>
 - **Spine's role is model-dependent (H3 confirmed).** On GLM-5.3-Flash,
   Spine is the top harness of the benchmark (98.7/99.1, ahead of Claude
   Code and Kimi Code); on DeepSeek V4.1-Flash without reasoning it trails
