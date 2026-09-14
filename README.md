@@ -20,15 +20,15 @@
 > Эталонная конфигурация Spine — **spine-arch-think** (харнесс + спайн-пакет + ризонинг модели, бюджет 64K). Все ключевые сравнения ниже — для неё.
 >
 > 1. **Spine с ризонингом — лучший или в паритете с лучшим на каждой модели:** 94.3 (DeepSeek V4.1 Flash), 94.5 (DeepSeek V4 Pro), 97.2 (GLM-5.3 Flash). Против Theseus — **+22.2 [+10.7; +34.3]** (значимо); против Claude Code — **паритет** (+2.4 [−3.7; +8.0]); против Kimi Code — **паритет** (−0.4 [−5.7; +4.5]).
-> 2. **На GLM-5.3 Flash Spine значимо обходит Claude Code:** **+7.2 [+0.3; +18.5]** — единственное статистически значимое превосходство над универсалом-лидером.
-> 3. **Отрыва от хороших универсалов нет.** Claude Code и Kimi Code с качественным `CONTEXT.md` закрывают те же задачи на 92–95 баллов без доменной специализации. Ценность Spine — не балл «из коробки», а контур вокруг него: гейты, трассируемость, handoff-пакеты (этот бенчмарк их не измеряет).
+> 2. **На GLM-5.3 Flash Spine обходит Claude Code — но на грани значимости:** **+7.2 [+0.3; +18.5]** — единственное превосходство над универсалом-лидером с CI, не накрывающим ноль. Вывод хрупкий: всего 8 общих задач (частичная glm-рука, D17), нижняя граница CI на краю нуля, а основную часть эффекта даёт одна задача (CMP-ARCH-001, +44.6 при медианном диффе ≈ +2).
+> 3. **Отрыва от хороших универсалов нет.** Claude Code и Kimi Code с качественным `CONTEXT.md` закрывают те же задачи на 90+ баллов (по моделям 89.6–96.8) без доменной специализации. Ценность Spine — не балл «из коробки», а контур вокруг него: гейты, трассируемость, handoff-пакеты (этот бенчмарк их не измеряет).
 > 4. **Ризонинг — главный усилитель Spine:** +4.7 [−1.1; +10.9] к тому же Spine без ризонинга на V4.1 Flash и **+12.3 [+3.5; +20.5]** на V4 Pro (значимо). Вклад самого доменного формата (спайн-пакет) — слабый плюс +3–5 баллов поверх голого харнесса.
 > 5. **Кастомизация универсалов под архитекторов не окупается** (H2 ✗, теперь на полных руках): claude-arch − claude-plain = +0.6 [−2.2; +4.2], kimi-arch − kimi-plain = −0.7 [−4.9; +3.3]. «Архитектурные» AGENTS.md для кодовых агентов эффекта не дают — не тратьте на них время.
-> 6. **Агентный контур важнее выбора харнесса — но это зависит от модели** (H3 ✓): на DeepSeek голая модель даёт 77 против 90+ у любого харнесса (+14.9 [+10.0; +19.7] у Claude Code); на GLM-5.3 Flash голая модель почти не проигрывает (93.5, n=4 — осторожно). Эффект любого харнесса мерьте на своей целевой модели.
+> 6. **Агентный контур важнее выбора харнесса — но это зависит от модели** (H3 ✓): на DeepSeek голая модель даёт 77 против 90+ у большинства харнессов (+14.9 [+10.0; +19.7] у Claude Code) — но не у всех: Theseus ниже голой модели (72.1, с arch-кастомизацией 67.3), Spine без ризонинга — 84–90; на GLM-5.3 Flash голая модель почти не проигрывает (93.5, n=4 — осторожно). Эффект любого харнесса мерьте на своей целевой модели.
 > 7. **Надёжность — главный риск агентных прогонов:** 30–33% ответов Theseus оборваны лимитом ходов; 18 «обрывов» Spine оказались дефектом извлечения, а не модели (D18); связка arch-be × glm-5.3-flash частично несовместима (D14). **Проверяйте пайплайн извлечения ответов прежде, чем судить модель.**
 
 > [!TIP]
-> **EN — Key takeaways for architects** (reference Spine configuration = **spine-arch-think**: harness + spine pack + model reasoning, 64K budget): (1) Spine with reasoning is best or tied for best on every model — 94.3 (DeepSeek V4.1 Flash), 94.5 (V4 Pro), 97.2 (GLM-5.3 Flash); vs Theseus **+22.2 [+10.7; +34.3]** (significant), vs Claude Code parity (+2.4 [−3.7; +8.0]), vs Kimi Code parity (−0.4 [−5.7; +4.5]); (2) on GLM-5.3 Flash Spine **significantly beats Claude Code: +7.2 [+0.3; +18.5]** — the only significant win over a leading universal; (3) no breakaway — good universals with a solid `CONTEXT.md` reach 92–95 without domain specialization; Spine's value is the surrounding loop (gates, traceability, handoff packs), which this benchmark does not measure; (4) reasoning is Spine's main amplifier: +4.7 [−1.1; +10.9] on V4.1 Flash, **+12.3 [+3.5; +20.5]** on V4 Pro; the domain format itself adds a modest +3–5 on top of the bare harness; (5) architect customization of coding harnesses does not pay off (H2 rejected on full arms: claude +0.6, kimi −0.7, CIs span zero); (6) the agentic loop matters more than harness choice on DeepSeek (raw model 77 vs 90+), but barely matters on GLM — everything is model-dependent, measure on your target model; (7) reliability is the main risk — turn-limit truncations and extraction defects; check your answer-extraction pipeline before judging a model.
+> **EN — Key takeaways for architects** (reference Spine configuration = **spine-arch-think**: harness + spine pack + model reasoning, 64K budget): (1) Spine with reasoning is best or tied for best on every model — 94.3 (DeepSeek V4.1 Flash), 94.5 (V4 Pro), 97.2 (GLM-5.3 Flash); vs Theseus **+22.2 [+10.7; +34.3]** (significant), vs Claude Code parity (+2.4 [−3.7; +8.0]), vs Kimi Code parity (−0.4 [−5.7; +4.5]); (2) on GLM-5.3 Flash Spine **beats Claude Code at the edge of significance: +7.2 [+0.3; +18.5]** — the only win over a leading universal whose CI excludes zero, but fragile (8 shared tasks, lower bound at zero's edge, one task — CMP-ARCH-001, +44.6 — drives most of it; median diff ≈ +2); (3) no breakaway — good universals with a solid `CONTEXT.md` reach 90+ (89.6–96.8 across models) without domain specialization; Spine's value is the surrounding loop (gates, traceability, handoff packs), which this benchmark does not measure; (4) reasoning is Spine's main amplifier: +4.7 [−1.1; +10.9] on V4.1 Flash, **+12.3 [+3.5; +20.5]** on V4 Pro; the domain format itself adds a modest +3–5 on top of the bare harness; (5) architect customization of coding harnesses does not pay off (H2 rejected on full arms: claude +0.6, kimi −0.7, CIs span zero); (6) the agentic loop matters more than harness choice on DeepSeek (raw model 77 vs 90+ for most harnesses — but not all: Theseus sits below the raw model at 72.1/67.3), but barely matters on GLM — everything is model-dependent, measure on your target model; (7) reliability is the main risk — turn-limit truncations and extraction defects; check your answer-extraction pipeline before judging a model.
 
 ---
 
@@ -97,7 +97,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 сравнивать их с полными следует с осторожностью: выборка может быть
 смещена в сторону «простых» или «сложных» задач.
 
-**Эффекты** (парная разность средних по задачам, bootstrap 95% CI; эталон Spine —
+**Эффекты** (парная разность по ячейкам «задача × повтор», bootstrap 95% CI; эталон Spine —
 **spine-arch-think**):
 
 | Сравнение | Δ баллов | Что это значит |
@@ -109,7 +109,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 | think − kimi-arch (dsf) | +0.3 [−6.0; +6.0] | паритет с Kimi Code + кастомизация |
 | think − spine-arch, без ризонинга (dsf) | +4.7 [−1.1; +10.9] | премия ризонинга на V4.1 Flash |
 | think − spine-arch, без ризонинга (dsp) | **+12.3 [+3.5; +20.5]** | **премия ризонинга на V4 Pro — значима** |
-| think − claude-plain (glm) | **+7.2 [+0.3; +18.5]** | **на GLM think значимо выше Claude Code** |
+| think − claude-plain (glm) | **+7.2 [+0.3; +18.5]** | на GLM think выше Claude Code — на грани значимости (8 общих задач, эффект вытягивает CMP-ARCH-001) |
 | think − kimi-plain (glm) | +0.7 [−1.4; +3.0] | на GLM паритет с Kimi Code |
 | think − claude-plain (dsp) | −2.3 [−8.4; +1.6] | на V4 Pro паритет с Claude Code |
 | spine-arch − claude-plain (dsf, без ризонинга) | −2.4 [−8.6; +3.6] | без ризонинга — паритет-минус |
@@ -132,7 +132,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
    spine-arch-think значимо сильнее Theseus (**+22.2 [+10.7; +34.3]**) и
    идёт в **паритете с лучшими универсалами** — Claude Code
    (+2.4 [−3.7; +8.0]) и Kimi Code (−0.4 [−5.7; +4.5]). На GLM-5.3 Flash —
-   **значимое превосходство над Claude Code** (+7.2 [+0.3; +18.5]).
+   превосходство над Claude Code **на грани значимости** (+7.2 [+0.3; +18.5]):
+   8 общих задач, нижняя граница CI у нуля, основную часть эффекта даёт
+   CMP-ARCH-001 (+44.6 при медианном диффе ≈ +2).
    Без ризонинга (spine-arch) картина слабее: паритет-минус с Claude Code
    (−2.4) и отставание от Kimi Code (−5.1 [−9.9; −0.5]).
 2. **Ризонинг — главный усилитель Spine:** премия think над spine-arch
@@ -143,7 +145,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
    первой редакции (там вклад формата тонул в обрывах).
 4. **Специализация даёт прирост относительно самого Spine, но не отрыв
    от хороших универсалов** — Kimi/Claude Code закрывают те же задачи
-   на 92–95 баллов без доменного формата. Реальная ценность Spine —
+   на 90+ баллов (по моделям 89.6–96.8) без доменного формата. Реальная ценность Spine —
    контур вокруг документа (гейты, трассировка, handoff), который этот
    бенчмарк не измеряет.
 5. **Кастомизация универсалов под архитекторов (H2) эффекта не дала** —
@@ -185,6 +187,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 - Судья одиночный (deepseek-v4-pro) из семейства одного из решателей —
   смещение декларируется, но не измерено (пул судей отменён по стоимости).
 - Сравнение dsf↔glm (H3) — на пересечении 8–16 задач; glm53-канал не закрыт.
+- Превосходство think над Claude Code на glm (+7.2) опирается на 8 общих
+  задач, и основную часть эффекта даёт одна из них (CMP-ARCH-001, +44.6);
+  трактовать как сигнал на грани значимости, а не устойчивый эффект.
 - 2 ячейки выведены из-за хронических таймаутов (D14).
 - Результаты — про режим «один документ на задачу»; они не оценивают
   многошаговую работу архитектора (гейты, трассировка, handoff) в проде.
@@ -242,16 +247,20 @@ pi-coding-agent), on 24 architecture tasks built from the official
   spine-arch-think beats Theseus significantly (**+22.2 [+10.7; +34.3]**)
   and is **at parity with the best universal harnesses** — Claude Code
   (+2.4 [−3.7; +8.0]) and Kimi Code (−0.4 [−5.7; +4.5]). On GLM-5.3
-  Flash it **significantly beats Claude Code (+7.2 [+0.3; +18.5])**.
+  Flash it beats Claude Code **at the edge of significance
+  (+7.2 [+0.3; +18.5])**: 8 shared tasks, the CI's lower bound at zero's
+  edge, and one task — CMP-ARCH-001 (+44.6, median diff ≈ +2) — drives
+  most of the effect.
 - **Reasoning is Spine's main amplifier:** think vs spine-arch is +4.7
   [−1.1; +10.9] on V4.1 Flash and **+12.3 [+3.5; +20.5]** on V4 Pro.
 - **The spine format is a small plus on top of the harness**
-  (spine-arch − spine-min = +5.2 [−1.0; +11.5], ~+4 in the task-paired
-  view), not zero as in the first edition.
+  (spine-arch − spine-min = +5.2 [−1.0; +11.5], ~+4 pooled across
+  models), not zero as in the first edition.
 - **Specialization lifts Spine over itself but does not break away from
-  good universal harnesses** — Kimi/Claude Code score 92–95 without the
-  domain format. Spine's real value is the surrounding loop (gates,
-  traceability, handoff packs), which this benchmark does not measure.
+  good universal harnesses** — Kimi/Claude Code score 90+ (89.6–96.8
+  across models) without the domain format. Spine's real value is the
+  surrounding loop (gates, traceability, handoff packs), which this
+  benchmark does not measure.
 - **Customization of coding harnesses for architects (H2) showed no
   effect** on full arms: claude-arch − claude-plain = +0.6 [−2.2; +4.2],
   kimi-arch − kimi-plain = −0.7 [−4.9; +3.3].
@@ -277,7 +286,10 @@ Python); per-cell data in `results/`; final report with diagrams in
 
 Single-family judge (deepseek-v4-pro) — declared, not measured
 (judge pool cancelled for cost); dsf↔glm comparison on an 8–16 task
-intersection; 2 cells dropped (chronic timeouts, D14). The benchmark
+intersection; the think-vs-Claude-Code edge on glm (+7.2) rests on 8
+shared tasks and is mostly carried by one of them (CMP-ARCH-001, +44.6)
+— read it as borderline-significant, not a stable effect; 2 cells
+dropped (chronic timeouts, D14). The benchmark
 evaluates single-document architecture work, not the full gated,
 traceable, handoff-driven architect workflow.
 
