@@ -1,0 +1,23 @@
+{
+  "method": "парная разность по ячейкам «задача × повтор», bootstrap 95% CI (10000 ресэмплов); эталон Spine — spine-arch-think; сравнения по отдельным конфигурациям Spine, без усреднения рук",
+  "source": "пересчёт из results.jsonl; значения совпадают с опубликованными в README",
+  "reference": "spine-arch-think",
+  "effects": {
+    "think − theseus-plain (dsf)": {"diff": 22.2, "ci_lo": 10.7, "ci_hi": 34.3, "note": "Spine значимо сильнее Theseus (H1 ✓)"},
+    "think − claude-plain, фабричный (dsf)": {"diff": 2.4, "ci_lo": -3.7, "ci_hi": 8.0, "note": "премия над фабричным Claude Code (паритет)"},
+    "think − claude-arch, arch-контекст (dsf)": {"diff": 1.8, "ci_lo": -4.6, "ci_hi": 8.1, "note": "премия над Claude Code с кастомизацией (паритет)"},
+    "think − kimi-plain (dsf)": {"diff": -0.4, "ci_lo": -5.7, "ci_hi": 4.5, "note": "паритет с Kimi Code"},
+    "think − kimi-arch (dsf)": {"diff": 0.3, "ci_lo": -6.0, "ci_hi": 6.0, "note": "паритет с Kimi Code + кастомизация"},
+    "think − spine-arch, без ризонинга (dsf)": {"diff": 4.7, "ci_lo": -1.1, "ci_hi": 10.9, "note": "премия ризонинга на V4.1 Flash"},
+    "think − spine-arch, без ризонинга (dsp)": {"diff": 12.3, "ci_lo": 3.5, "ci_hi": 20.5, "note": "премия ризонинга на V4 Pro — значима"},
+    "think − claude-plain (glm)": {"diff": 7.2, "ci_lo": 0.3, "ci_hi": 18.5, "note": "на GLM think выше Claude Code — на грани значимости (8 общих задач, эффект вытягивает CMP-ARCH-001)"},
+    "think − kimi-plain (glm)": {"diff": 0.7, "ci_lo": -1.4, "ci_hi": 3.0, "note": "на GLM паритет с Kimi Code"},
+    "think − claude-plain (dsp)": {"diff": -2.3, "ci_lo": -8.4, "ci_hi": 1.6, "note": "на V4 Pro паритет с Claude Code"},
+    "spine-arch − claude-plain (dsf, без ризонинга)": {"diff": -2.4, "ci_lo": -8.6, "ci_hi": 3.6, "note": "без ризонинга — паритет-минус"},
+    "spine-arch − kimi-plain (dsf)": {"diff": -5.1, "ci_lo": -9.9, "ci_hi": -0.5, "note": "без ризонинга — отставание от Kimi Code"},
+    "spine-arch − spine-min (dsf)": {"diff": 5.2, "ci_lo": -1.0, "ci_hi": 11.5, "note": "вклад формата — слабый плюс поверх харнесса"},
+    "claude-arch − claude-plain (dsf)": {"diff": 0.6, "ci_lo": -2.2, "ci_hi": 4.2, "note": "H2 ✗: кастомизация Claude Code без эффекта"},
+    "kimi-arch − kimi-plain (dsf)": {"diff": -0.7, "ci_lo": -4.9, "ci_hi": 3.3, "note": "H2 ✗: кастомизация Kimi Code без эффекта"},
+    "claude-plain − raw-llm (dsf)": {"diff": 14.9, "ci_lo": 10.0, "ci_hi": 19.7, "note": "агентный контур даёт +15 над голой моделью"}
+  }
+}
