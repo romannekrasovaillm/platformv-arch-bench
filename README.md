@@ -200,7 +200,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 - **Воспроизводство**: `runners/` — подготовка ячеек
   (`prepare_cells.py`), прогон (`run_matrix.py`), механические скореры
   (`mech_score.py`), судья (`judge.py`, пул — `judge_merge.py`), анализ
-  (`analyze.py`), отчёт (`report_docx.py`). Полный отчёт с диаграммами:
+  (`analyze.py`), каноничные эффекты (`paired_effects.py` →
+  `results/effects_paired.json`, со сверкой против опубликованных
+  значений), отчёт (`report_docx.py`). Полный отчёт с диаграммами:
   `report/otchet_platformv_arch_bench_20260914_0728.docx`.
 
 ### Ограничения
