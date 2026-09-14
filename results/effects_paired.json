@@ -18,6 +18,6 @@
     "spine-arch − spine-min (dsf)": {"diff": 5.2, "ci_lo": -1.0, "ci_hi": 11.5, "note": "вклад формата — слабый плюс поверх харнесса"},
     "claude-arch − claude-plain (dsf)": {"diff": 0.6, "ci_lo": -2.2, "ci_hi": 4.2, "note": "H2 ✗: кастомизация Claude Code без эффекта"},
     "kimi-arch − kimi-plain (dsf)": {"diff": -0.7, "ci_lo": -4.9, "ci_hi": 3.3, "note": "H2 ✗: кастомизация Kimi Code без эффекта"},
-    "claude-plain − raw-llm (dsf)": {"diff": 14.9, "ci_lo": 10.0, "ci_hi": 19.7, "note": "агентный контур даёт +15 над голой моделью"}
+    "claude-plain − raw-llm (dsf)": {"diff": 14.9, "ci_lo": 10.0, "ci_hi": 19.7, "note": "контур + ризонинг дают +15 над голой моделью (raw — неризонящий алиас, D21)"}
   }
 }

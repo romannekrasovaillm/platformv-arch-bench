@@ -71,7 +71,8 @@ EFFECTS = [
     ("kimi-arch − kimi-plain (dsf)", "kimi-arch", "kimi-plain", "dsf",
      "H2 ✗: кастомизация Kimi Code без эффекта"),
     ("claude-plain − raw-llm (dsf)", "claude-plain", "raw-llm", "dsf",
-     "агентный контур даёт +15 над голой моделью"),
+     "контур + ризонинг дают +15 над голой моделью (raw — неризонящий "
+     "алиас, D21)"),
 ]
 
 METHOD = ("парная разность по ячейкам «задача × повтор», bootstrap 95% CI "
