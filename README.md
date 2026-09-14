@@ -19,7 +19,7 @@
 >
 > Spine представлен тремя конфигурациями (руками): **spine-arch** (харнесс + спайн-пакет), **spine-min** (голый харнесс, без спайн-пакета) и **spine-arch-think** (spine-arch + ризонинг модели, бюджет 64K) — эталонная. **Все сравнения ниже — по отдельным конфигурациям, а не по среднему между ними**: усреднение рук в отчёте нигде не используется (руки отвечают на разные вопросы дизайна — вклад формата и вклад ризонинга). Если в сравнении сказано просто «Spine», имеется в виду эталонная spine-arch-think.
 >
-> 1. **Spine с ризонингом (spine-arch-think) — лучший или в паритете с лучшим на каждой модели:** 94.3 (DeepSeek V4.1 Flash), 94.5 (DeepSeek V4 Pro), 97.2 (GLM-5.3 Flash). Против Theseus — **+22.2 [+10.7; +34.3]** (значимо); против Claude Code — **паритет** (+2.4 [−3.7; +8.0]); против Kimi Code — **паритет** (−0.4 [−5.7; +4.5]).
+> 1. **Spine с ризонингом (spine-arch-think) — лучший или в паритете с лучшим на каждой модели:** 94.3 (DeepSeek V4.1 Flash), 94.5 (DeepSeek V4 Pro), 97.2 (GLM-5.3 Flash). Против Theseus — **+22.2 [+10.7; +34.3]** (значимо); против Claude Code — **паритет** (+2.4 [−3.7; +8.0]); против Kimi Code — **паритет** (−0.4 [−5.7; +4.5]). При этом на dsf Claude Code и Kimi Code работали **без ризонинга** — паритет здесь это «think on» против «think off» (подробности — «Ризонинг по рукам» под обозначениями условий).
 > 2. **На GLM-5.3 Flash spine-arch-think обходит Claude Code — но на грани значимости:** **+7.2 [+0.3; +18.5]** — единственное превосходство над универсалом-лидером с CI, не накрывающим ноль. Вывод хрупкий: всего 8 общих задач (частичная glm-рука, D17), нижняя граница CI на краю нуля, а основную часть эффекта даёт одна задача (CMP-ARCH-001, +44.6 при медианном диффе ≈ +2).
 > 3. **Отрыва от хороших универсалов нет.** Claude Code и Kimi Code с качественным `CONTEXT.md` закрывают те же задачи на 90+ баллов (по моделям 89.6–96.8) без доменной специализации. Ценность Spine — не балл «из коробки», а контур вокруг него: гейты, трассируемость, handoff-пакеты (этот бенчмарк их не измеряет).
 > 4. **Ризонинг — главный усилитель Spine:** +4.7 [−1.1; +10.9] к spine-arch (тот же Spine без ризонинга) на V4.1 Flash и **+12.3 [+3.5; +20.5]** на V4 Pro (значимо). Вклад самого доменного формата (спайн-пакет; spine-arch против spine-min) — слабый плюс +3–5 баллов поверх голого харнесса.
@@ -76,6 +76,25 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 > (одиночный API-вызов, без агентного контура). Сравнения ведутся
 > **по отдельным конфигурациям Spine** (эталон — `spine-arch-think`),
 > а не по среднему между ними.
+
+**Ризонинг по рукам (точно).** Claude Code и Kimi Code запускались в
+заводской конфигурации, **без thinking-флагов** (`claude -p --model …`,
+`kimi -p -m …`; см. `build_cmd` в `runners/run_matrix.py`):
+
+- **dsf (DeepSeek V4.1 Flash)** — ризонинг по умолчанию выключен:
+  **Claude Code и Kimi Code работали без ризонинга** (как и qwen, omp,
+  raw-llm и spine-arch / spine-min — там явный `--think off`, D10).
+  Ризонили только `spine-arch-think` (`--think on`, бюджет 64K) и
+  theseus/openclaw (ризонинг max — боевые дефолты харнессов, D11).
+  Поэтому паритет think с claude/kimi на dsf — это сравнение «Spine с
+  ризонингом» против «универсалов без ризонинга».
+- **GLM-5.3 Flash** — ризонинг включён на стороне модели у **всех** рук:
+  API Z.AI не позволяет его отключить (HTTP 1210, доступен только effort
+  low/high/max); харнессы effort не задавали — действовал дефолт
+  провайдера (у raw-llm — явно effort=low).
+- **DeepSeek V4 Pro** — ризонящая модель по умолчанию: Claude Code,
+  Kimi Code и raw-llm работали **с ризонингом**; spine-arch — с
+  `--think off`, spine-arch-think — с `--think on` (64K).
 
 | Условие | DeepSeek V4.1 Flash | GLM-5.3 Flash | DeepSeek V4 Pro |
 |---|---|---|---|
@@ -242,6 +261,25 @@ pi-coding-agent), on 24 architecture tasks built from the official
 >
 > All comparisons are for **individual Spine configurations** (reference:
 > `spine-arch-think`), never a pooled average over the three Spine arms.
+
+**Reasoning per arm (exactly).** Claude Code and Kimi Code ran in stock
+configuration, **with no thinking flags** (`claude -p --model …`,
+`kimi -p -m …`; see `build_cmd` in `runners/run_matrix.py`):
+
+- **dsf (DeepSeek V4.1 Flash)** — reasoning is off by default: **Claude
+  Code and Kimi Code ran without reasoning** (as did qwen, omp, raw-llm,
+  and spine-arch / spine-min via explicit `--think off`, D10). Only
+  `spine-arch-think` (`--think on`, 64K budget) and theseus/openclaw
+  (reasoning max — their stock harness defaults, D11) reasoned. So the
+  dsf parity vs claude/kimi is "Spine with reasoning" vs "universals
+  without reasoning".
+- **GLM-5.3 Flash** — model-side reasoning is on for **all** arms: the
+  Z.AI API cannot disable it (HTTP 1210, only low/high/max effort is
+  accepted); harnesses set no effort, so the provider default applied
+  (raw-llm explicitly used effort=low).
+- **DeepSeek V4 Pro** — a reasoning model by default: Claude Code, Kimi
+  Code and raw-llm ran **with reasoning**; spine-arch with `--think
+  off`, spine-arch-think with `--think on` (64K).
 >
 - **Important: D18 truncation fix.** The first data edition understated
   Spine: 18 cells hard-failed due to an extraction defect (arch-be wrote
@@ -251,7 +289,9 @@ pi-coding-agent), on 24 architecture tasks built from the official
 - **H1 confirmed for Spine with reasoning (reference configuration):**
   spine-arch-think beats Theseus significantly (**+22.2 [+10.7; +34.3]**)
   and is **at parity with the best universal harnesses** — Claude Code
-  (+2.4 [−3.7; +8.0]) and Kimi Code (−0.4 [−5.7; +4.5]). On GLM-5.3
+  (+2.4 [−3.7; +8.0]) and Kimi Code (−0.4 [−5.7; +4.5]) — which on dsf
+  both ran **without reasoning** (parity here is "think on" vs "think
+  off"; see the per-arm reasoning note above). On GLM-5.3
   Flash it beats Claude Code **at the edge of significance
   (+7.2 [+0.3; +18.5])**: 8 shared tasks, the CI's lower bound at zero's
   edge, and one task — CMP-ARCH-001 (+44.6, median diff ≈ +2) — drives
