@@ -173,7 +173,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
   `runners/judge.py`.
 - **Пререгистрация**: `PREREGISTRATION.md` (+ хэши задач
   `prereg_hashes_v2.txt`). Все отклонения задокументированы:
-  `DEVIATIONS.md` (D1–D19).
+  `DEVIATIONS.md` (D1–D20).
 - **Воспроизводство**: `runners/` — подготовка ячеек
   (`prepare_cells.py`), прогон (`run_matrix.py`), механические скореры
   (`mech_score.py`), судья (`judge.py`, пул — `judge_merge.py`), анализ
@@ -197,7 +197,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 - `results/` — `results.jsonl` (все 1032 записи, 917 с вердиктом судьи)
   и `summary.json`;
 - `report/` — финальный docx + диаграммы PNG;
-- `PREREGISTRATION.md`, `DEVIATIONS.md` — пререгистрация и D1–D19.
+- `PREREGISTRATION.md`, `DEVIATIONS.md` — пререгистрация и D1–D20.
 
 Источник истины и развитие бенчмарка — монорепозиторий Spine
 (каталог `benchmarks/platformv-arch-bench/`).
@@ -269,7 +269,7 @@ Each task ships `TASK.md` (role, D1–D10 deliverables), `CONTEXT.md`
 anonymized answers, JSON verdicts, **evidence-quote verification**,
 hard-fail caps the score at 39. Hypotheses preregistered
 (`PREREGISTRATION.md` + task hashes); all deviations documented
-(`DEVIATIONS.md`, D1–D19). Full pipeline in `runners/` (stdlib-only
+(`DEVIATIONS.md`, D1–D20). Full pipeline in `runners/` (stdlib-only
 Python); per-cell data in `results/`; final report with diagrams in
 `report/`.
 
