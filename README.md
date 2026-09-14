@@ -17,18 +17,18 @@
 > [!IMPORTANT]
 > ## 🎯 Ключевые выводы для архитекторов
 >
-> Эталонная конфигурация Spine — **spine-arch-think** (харнесс + спайн-пакет + ризонинг модели, бюджет 64K). Все ключевые сравнения ниже — для неё.
+> Spine представлен тремя конфигурациями (руками): **spine-arch** (харнесс + спайн-пакет), **spine-min** (голый харнесс, без спайн-пакета) и **spine-arch-think** (spine-arch + ризонинг модели, бюджет 64K) — эталонная. **Все сравнения ниже — по отдельным конфигурациям, а не по среднему между ними**: усреднение рук в отчёте нигде не используется (руки отвечают на разные вопросы дизайна — вклад формата и вклад ризонинга). Если в сравнении сказано просто «Spine», имеется в виду эталонная spine-arch-think.
 >
-> 1. **Spine с ризонингом — лучший или в паритете с лучшим на каждой модели:** 94.3 (DeepSeek V4.1 Flash), 94.5 (DeepSeek V4 Pro), 97.2 (GLM-5.3 Flash). Против Theseus — **+22.2 [+10.7; +34.3]** (значимо); против Claude Code — **паритет** (+2.4 [−3.7; +8.0]); против Kimi Code — **паритет** (−0.4 [−5.7; +4.5]).
-> 2. **На GLM-5.3 Flash Spine обходит Claude Code — но на грани значимости:** **+7.2 [+0.3; +18.5]** — единственное превосходство над универсалом-лидером с CI, не накрывающим ноль. Вывод хрупкий: всего 8 общих задач (частичная glm-рука, D17), нижняя граница CI на краю нуля, а основную часть эффекта даёт одна задача (CMP-ARCH-001, +44.6 при медианном диффе ≈ +2).
+> 1. **Spine с ризонингом (spine-arch-think) — лучший или в паритете с лучшим на каждой модели:** 94.3 (DeepSeek V4.1 Flash), 94.5 (DeepSeek V4 Pro), 97.2 (GLM-5.3 Flash). Против Theseus — **+22.2 [+10.7; +34.3]** (значимо); против Claude Code — **паритет** (+2.4 [−3.7; +8.0]); против Kimi Code — **паритет** (−0.4 [−5.7; +4.5]).
+> 2. **На GLM-5.3 Flash spine-arch-think обходит Claude Code — но на грани значимости:** **+7.2 [+0.3; +18.5]** — единственное превосходство над универсалом-лидером с CI, не накрывающим ноль. Вывод хрупкий: всего 8 общих задач (частичная glm-рука, D17), нижняя граница CI на краю нуля, а основную часть эффекта даёт одна задача (CMP-ARCH-001, +44.6 при медианном диффе ≈ +2).
 > 3. **Отрыва от хороших универсалов нет.** Claude Code и Kimi Code с качественным `CONTEXT.md` закрывают те же задачи на 90+ баллов (по моделям 89.6–96.8) без доменной специализации. Ценность Spine — не балл «из коробки», а контур вокруг него: гейты, трассируемость, handoff-пакеты (этот бенчмарк их не измеряет).
-> 4. **Ризонинг — главный усилитель Spine:** +4.7 [−1.1; +10.9] к тому же Spine без ризонинга на V4.1 Flash и **+12.3 [+3.5; +20.5]** на V4 Pro (значимо). Вклад самого доменного формата (спайн-пакет) — слабый плюс +3–5 баллов поверх голого харнесса.
+> 4. **Ризонинг — главный усилитель Spine:** +4.7 [−1.1; +10.9] к spine-arch (тот же Spine без ризонинга) на V4.1 Flash и **+12.3 [+3.5; +20.5]** на V4 Pro (значимо). Вклад самого доменного формата (спайн-пакет; spine-arch против spine-min) — слабый плюс +3–5 баллов поверх голого харнесса.
 > 5. **Кастомизация универсалов под архитекторов не окупается** (H2 ✗, теперь на полных руках): claude-arch − claude-plain = +0.6 [−2.2; +4.2], kimi-arch − kimi-plain = −0.7 [−4.9; +3.3]. «Архитектурные» AGENTS.md для кодовых агентов эффекта не дают — не тратьте на них время.
-> 6. **Агентный контур важнее выбора харнесса — но это зависит от модели** (H3 ✓): на DeepSeek голая модель даёт 77 против 90+ у большинства харнессов (+14.9 [+10.0; +19.7] у Claude Code) — но не у всех: Theseus ниже голой модели (72.1, с arch-кастомизацией 67.3), Spine без ризонинга — 84–90; на GLM-5.3 Flash голая модель почти не проигрывает (93.5, n=4 — осторожно). Эффект любого харнесса мерьте на своей целевой модели.
+> 6. **Агентный контур важнее выбора харнесса — но это зависит от модели** (H3 ✓): на DeepSeek голая модель даёт 77 против 90+ у большинства харнессов (+14.9 [+10.0; +19.7] у Claude Code) — но не у всех: Theseus ниже голой модели (72.1, с arch-кастомизацией 67.3), Spine без ризонинга — 84–90 (spine-min 84.4, spine-arch 89.6); на GLM-5.3 Flash голая модель почти не проигрывает (93.5, n=4 — осторожно). Эффект любого харнесса мерьте на своей целевой модели.
 > 7. **Надёжность — главный риск агентных прогонов:** 30–33% ответов Theseus оборваны лимитом ходов; 18 «обрывов» Spine оказались дефектом извлечения, а не модели (D18); связка arch-be × glm-5.3-flash частично несовместима (D14). **Проверяйте пайплайн извлечения ответов прежде, чем судить модель.**
 
 > [!TIP]
-> **EN — Key takeaways for architects** (reference Spine configuration = **spine-arch-think**: harness + spine pack + model reasoning, 64K budget): (1) Spine with reasoning is best or tied for best on every model — 94.3 (DeepSeek V4.1 Flash), 94.5 (V4 Pro), 97.2 (GLM-5.3 Flash); vs Theseus **+22.2 [+10.7; +34.3]** (significant), vs Claude Code parity (+2.4 [−3.7; +8.0]), vs Kimi Code parity (−0.4 [−5.7; +4.5]); (2) on GLM-5.3 Flash Spine **beats Claude Code at the edge of significance: +7.2 [+0.3; +18.5]** — the only win over a leading universal whose CI excludes zero, but fragile (8 shared tasks, lower bound at zero's edge, one task — CMP-ARCH-001, +44.6 — drives most of it; median diff ≈ +2); (3) no breakaway — good universals with a solid `CONTEXT.md` reach 90+ (89.6–96.8 across models) without domain specialization; Spine's value is the surrounding loop (gates, traceability, handoff packs), which this benchmark does not measure; (4) reasoning is Spine's main amplifier: +4.7 [−1.1; +10.9] on V4.1 Flash, **+12.3 [+3.5; +20.5]** on V4 Pro; the domain format itself adds a modest +3–5 on top of the bare harness; (5) architect customization of coding harnesses does not pay off (H2 rejected on full arms: claude +0.6, kimi −0.7, CIs span zero); (6) the agentic loop matters more than harness choice on DeepSeek (raw model 77 vs 90+ for most harnesses — but not all: Theseus sits below the raw model at 72.1/67.3), but barely matters on GLM — everything is model-dependent, measure on your target model; (7) reliability is the main risk — turn-limit truncations and extraction defects; check your answer-extraction pipeline before judging a model.
+> **EN — Key takeaways for architects** (reference Spine configuration = **spine-arch-think**: harness + spine pack + model reasoning, 64K budget; all comparisons below are per individual Spine configuration — no average over the three Spine arms is used anywhere): (1) Spine with reasoning is best or tied for best on every model — 94.3 (DeepSeek V4.1 Flash), 94.5 (V4 Pro), 97.2 (GLM-5.3 Flash); vs Theseus **+22.2 [+10.7; +34.3]** (significant), vs Claude Code parity (+2.4 [−3.7; +8.0]), vs Kimi Code parity (−0.4 [−5.7; +4.5]); (2) on GLM-5.3 Flash Spine **beats Claude Code at the edge of significance: +7.2 [+0.3; +18.5]** — the only win over a leading universal whose CI excludes zero, but fragile (8 shared tasks, lower bound at zero's edge, one task — CMP-ARCH-001, +44.6 — drives most of it; median diff ≈ +2); (3) no breakaway — good universals with a solid `CONTEXT.md` reach 90+ (89.6–96.8 across models) without domain specialization; Spine's value is the surrounding loop (gates, traceability, handoff packs), which this benchmark does not measure; (4) reasoning is Spine's main amplifier: +4.7 [−1.1; +10.9] on V4.1 Flash, **+12.3 [+3.5; +20.5]** on V4 Pro; the domain format itself adds a modest +3–5 on top of the bare harness; (5) architect customization of coding harnesses does not pay off (H2 rejected on full arms: claude +0.6, kimi −0.7, CIs span zero); (6) the agentic loop matters more than harness choice on DeepSeek (raw model 77 vs 90+ for most harnesses — but not all: Theseus sits below the raw model at 72.1/67.3), but barely matters on GLM — everything is model-dependent, measure on your target model; (7) reliability is the main risk — turn-limit truncations and extraction defects; check your answer-extraction pipeline before judging a model.
 
 ---
 
@@ -73,7 +73,9 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 > **в заводской конфигурации**, без архитектурной кастомизации;
 > `<харнесс>-arch` — тот же харнесс с arch-кастомизацией
 > (AGENTS.md/CLAUDE.md для архитекторов); `raw-llm` — голая модель
-> (одиночный API-вызов, без агентного контура).
+> (одиночный API-вызов, без агентного контура). Сравнения ведутся
+> **по отдельным конфигурациям Spine** (эталон — `spine-arch-think`),
+> а не по среднему между ними.
 
 | Условие | DeepSeek V4.1 Flash | GLM-5.3 Flash | DeepSeek V4 Pro |
 |---|---|---|---|
@@ -98,7 +100,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 смещена в сторону «простых» или «сложных» задач.
 
 **Эффекты** (парная разность по ячейкам «задача × повтор», bootstrap 95% CI; эталон Spine —
-**spine-arch-think**):
+**spine-arch-think**; все сравнения — по отдельным конфигурациям Spine, без усреднения рук):
 
 | Сравнение | Δ баллов | Что это значит |
 |---|---|---|
@@ -237,6 +239,9 @@ pi-coding-agent), on 24 architecture tasks built from the official
 > general-purpose coding harness in its **stock configuration**, no
 > architect customization; `<harness>-arch` — same harness with architect
 > customization; `raw-llm` — bare model (single API call).
+>
+> All comparisons are for **individual Spine configurations** (reference:
+> `spine-arch-think`), never a pooled average over the three Spine arms.
 >
 - **Important: D18 truncation fix.** The first data edition understated
   Spine: 18 cells hard-failed due to an extraction defect (arch-be wrote
