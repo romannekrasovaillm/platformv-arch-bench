@@ -1,7 +1,7 @@
 # Platform V Architecture Benchmark: Spine vs универсальные кодовые харнессы
 
 ![Прогонов](https://img.shields.io/badge/прогонов-1032-1f6feb)
-![Оценено судьёй](https://img.shields.io/badge/оценено_судьёй-917-1f6feb)
+![Оценено судьёй](https://img.shields.io/badge/оценено_судьёй-963-1f6feb)
 ![Задачи](https://img.shields.io/badge/задачи-24-8250df)
 ![Модели](https://img.shields.io/badge/модели-4-1a7f37)
 ![Судья](https://img.shields.io/badge/LLM--судья-верификация_цитат-bf8700)
@@ -120,10 +120,11 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 | raw-llm (голая модель) | 77.0 ± 14.1 (n=48) | 93.5 ± 6.5 (**n=4**) | 83.9 ± 6.1 (n=24) |
 
 **Жирным** — лидер колонки. **n** — число оценённых прогонов в ячейке:
-полная ячейка это n=48 для dsf/glm (24 задачи × 2 повтора) и n=24 для dsp
-(×1 повтор); ячейки с малым **n** (жирное n) — частичные руки (D14, D17),
-сравнивать их с полными следует с осторожностью: выборка может быть
-смещена в сторону «простых» или «сложных» задач.
+полная ячейка это n=48 на dsf (24 задачи × 2 повтора), n=32 на glm
+(16 задач расширения × 2 повтора) и n=24 на dsp (×1 повтор); ячейки с
+малым **n** (жирное n) — частичные руки (D14, D17), сравнивать их с
+полными следует с осторожностью: выборка может быть смещена в сторону
+«простых» или «сложных» задач. Руки Claude Code добораны до полных в D22.
 
 **Эффекты** (парная разность по ячейкам «задача × повтор», bootstrap 95% CI; эталон Spine —
 **spine-arch-think**; все сравнения — по отдельным конфигурациям Spine, без усреднения рук):
@@ -165,12 +166,12 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
    втрое против прежней +7.2 — та была завышена обрезанной ячейкой
    CMP-ARCH-001, а интервал сузился с 18.2 до 6.9.
    Без ризонинга (spine-arch) картина слабее: паритет-минус с Claude Code
-   (−2.4) и отставание от Kimi Code (−5.1 [−9.9; −0.5]).
+   (−2.4) и отставание от Kimi Code (−5.1 [−10.1; −0.3]).
 2. **Ризонинг — главный усилитель Spine:** премия think над spine-arch
-   +4.7 на V4.1 Flash и **+12.3 [+3.5; +20.5]** на V4 Pro. Выключать
+   +4.7 на V4.1 Flash и **+12.3 [+3.4; +20.6]** на V4 Pro. Выключать
    ризонинг у Spine нельзя — без него харнесс теряет преимущество.
 3. **Формат спайна — слабый плюс поверх харнесса** (spine-arch − spine-min
-   = +5.2 [−1.0; +11.5]; в парном анализе — около +4), а не ноль, как в
+   = +5.2 [−0.7; +11.1]; в парном анализе — около +4), а не ноль, как в
    первой редакции (там вклад формата тонул в обрывах).
 4. **Специализация даёт прирост относительно самого Spine, но не отрыв
    от хороших универсалов** — Kimi/Claude Code закрывают те же задачи
@@ -178,11 +179,17 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
    контур вокруг документа (гейты, трассировка, handoff), который этот
    бенчмарк не измеряет.
 5. **Кастомизация универсалов под архитекторов (H2) эффекта не дала** —
-   на полных руках: claude-arch − claude-plain = +0.6 [−2.2; +4.2],
-   kimi-arch − kimi-plain = −0.7 [−4.9; +3.3].
+   на полных руках: claude-arch − claude-plain = +1.2 [−1.0; +4.4],
+   kimi-arch − kimi-plain = −0.7 [−5.0; +3.3].
 6. Побочные находки: hard-fail rate у Theseus 30–33% (обрезка на лимите
    ходов); зафиксирована несовместимость arch-be × glm-5.3-flash в
    агентном режиме на части задач (D14).
+7. **Аудит обрывов Claude Code (D22).** Две ячейки рук Claude Code были
+   повреждены дефектами сбора (обрезанный ответ и затёртый документ),
+   ещё 46 не добраны; после перегона glm-руки целиком оценка превосходства
+   Spine над Claude Code на GLM упала втрое (+7.2 → +3.0) при сужении
+   интервала с 18.2 до 6.9. Обрывов в этих руках больше нет: 963 из 963
+   отвеченных ячеек оценены, аудит извлечения — чистый.
 
 ![Тепловая карта по задачам](report/03_task_heatmap.png)
 ![Completeness и hard-fail](report/04_completeness_hf.png)
@@ -192,7 +199,8 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 
 - **Матрица**: 1032 прогона в 19 условиях × 24 задачи × до 2 повторов ×
   5 моделей/конфигураций (DeepSeek V4.1 Flash / V4 Pro, GLM-5.3 Flash /
-  5.3 + свип), завершено генераций 1017, **оценено судьёй 917**.
+  5.3 + свип), завершено генераций 963, **оценено судьёй 963** (обрывов
+  извлечения в руках Claude Code больше нет — D22).
   kimi×glm прогонялся через OpenRouter (та же модель, D17).
 - **Условия**: spine-arch, spine-min, spine-arch-think, theseus-plain/arch,
   claude-plain/arch, kimi-plain/arch, openclaw-plain, qwen-plain, omp-plain,
@@ -235,7 +243,7 @@ Platform V (Pangolin DB, Corax, Works::Architect Hub, DataMarts, SEI и др.):
 - `tasks/` — 24 задачи (TASK/CONTEXT/RUBRICS);
 - `spine/`, `customization/` — спайн-пакеты и arch-кастомизация;
 - `runners/` — весь код прогона, судейства и анализа (Python, stdlib);
-- `results/` — `results.jsonl` (все 1032 записи, 917 с вердиктом судьи)
+- `results/` — `results.jsonl` (все 1032 записи, 963 с вердиктом судьи)
   и `summary.json`;
 - `report/` — финальный docx + диаграммы PNG;
 - `PREREGISTRATION.md`, `DEVIATIONS.md` — пререгистрация и D1–D20.
@@ -257,11 +265,13 @@ harnesses** (Claude Code, Kimi Code, Theseus, OpenClaw, Qwen Code,
 pi-coding-agent), on 24 architecture tasks built from the official
 **Platform V (SberTech)** documentation.
 
-**1032 runs (917 judged) · 24 tasks · 19 conditions · 5 model configurations · evidence-verified LLM judge · preregistered hypotheses**
+**1032 runs (963 judged) · 24 tasks · 19 conditions · 5 model configurations · evidence-verified LLM judge · preregistered hypotheses**
 >
-> Status: 2026-09-14 snapshot — kimi-arch arm completed (n=48 on dsf);
-> reference Spine configuration is **spine-arch-think** (reasoning on);
-> claude-arch×glm and the 16-task GLM extension remain partial (D17).
+> Status: 2026-09-15 snapshot — the Claude Code arms are complete
+> (claude-plain/claude-arch: 48/48 on dsf, 24/24 on dsp, 32/32 on glm;
+> truncation audit in D22); reference Spine configuration is
+> **spine-arch-think** (reasoning on); the kimi×glm arms and the
+> 16-task GLM extension remain partial (D17).
 
 ### Headline results
 
@@ -324,7 +334,7 @@ stock configuration, with no thinking flags on the command line
 - **Reasoning is Spine's main amplifier:** think vs spine-arch is +4.7
   [−1.5; +10.7] on V4.1 Flash and **+12.3 [+3.4; +20.6]** on V4 Pro.
 - **The spine format is a small plus on top of the harness**
-  (spine-arch − spine-min = +5.2 [−1.0; +11.5], ~+4 pooled across
+  (spine-arch − spine-min = +5.2 [−0.7; +11.1], ~+4 pooled across
   models), not zero as in the first edition.
 - **Specialization lifts Spine over itself but does not break away from
   good universal harnesses** — Kimi/Claude Code score 90+ (89.6–96.8
@@ -332,14 +342,20 @@ stock configuration, with no thinking flags on the command line
   surrounding loop (gates, traceability, handoff packs), which this
   benchmark does not measure.
 - **Customization of coding harnesses for architects (H2) showed no
-  effect** on full arms: claude-arch − claude-plain = +0.6 [−2.2; +4.2],
-  kimi-arch − kimi-plain = −0.7 [−4.9; +3.3].
+  effect** on full arms: claude-arch − claude-plain = +1.2 [−1.0; +4.4],
+  kimi-arch − kimi-plain = −0.7 [−5.0; +3.3].
 - Side findings: Theseus hard-fail rate 30–33% (turn-limit truncation);
   an arch-be × glm-5.3-flash agentic-mode incompatibility on some tasks.
+- **Claude Code truncation audit (D22):** two Claude Code cells were
+  damaged by collection defects (a truncated answer and a clobbered
+  document) and 46 more were unfilled; after the GLM arm was fully
+  re-run the GLM edge over Claude Code fell threefold (+7.2 → +3.0)
+  while its interval narrowed from 18.2 to 6.9. Those arms now have no
+  truncations: 963 of 963 answered cells are judged.
 
 ### Methodology
 
-1032 runs (1017 completed, 917 judged) across 19 conditions × 24
+1032 runs (963 completed, 963 judged) across 19 conditions × 24
 tasks × 5 model configurations; kimi×glm ran via OpenRouter (same model,
 D17).
 Each task ships `TASK.md` (role, D1–D10 deliverables), `CONTEXT.md`
