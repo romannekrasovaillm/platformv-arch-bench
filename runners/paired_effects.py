@@ -54,8 +54,9 @@ EFFECTS = [
     ("think − spine-arch, без ризонинга (dsp)", "spine-arch-think",
      "spine-arch", "dsp", "премия ризонинга на V4 Pro — значима"),
     ("think − claude-plain (glm)", "spine-arch-think", "claude-plain",
-     "glm", "на GLM think выше Claude Code — на грани значимости "
-            "(8 общих задач, эффект вытягивает CMP-ARCH-001)"),
+     "glm", "на GLM think немного выше Claude Code — значимо на нижней "
+            "границе (32 пары; до D22 было +7.2 на 8 парах, эффект тянула "
+            "обрезанная ячейка CMP-ARCH-001)"),
     ("think − kimi-plain (glm)", "spine-arch-think", "kimi-plain", "glm",
      "на GLM паритет с Kimi Code"),
     ("think − claude-plain (dsp)", "spine-arch-think", "claude-plain",
